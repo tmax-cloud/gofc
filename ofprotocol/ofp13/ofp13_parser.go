@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"errors"
 	"net"
+	"sync"
 )
 
 func Parse(packet []byte) (msg OFMessage) {
@@ -56,10 +57,12 @@ func Parse(packet []byte) (msg OFMessage) {
 }
 
 var xid uint32 = 0
-
+var mutex sync.RWMutex
 func nextXid() uint32 {
+	mutex.Lock()
 	tmp := xid
 	xid += 1
+	mutex.Unlock()
 	return tmp
 }
 
