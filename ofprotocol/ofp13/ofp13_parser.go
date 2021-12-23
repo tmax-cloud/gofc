@@ -6404,7 +6404,7 @@ func (mp *OfpGroupDescStats) Parse(packet []byte) {
 }
 
 func (mp *OfpGroupDescStats) Size() int {
-	size := 16
+	size := 8
 	for _, b := range mp.Buckets {
 		size += b.Size()
 	}
